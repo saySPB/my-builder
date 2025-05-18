@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android App Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ Собери своё Android-приложение</h1>
+        
+        <!-- Блок загрузки кода -->
+        <div class="upload-area" id="uploadArea">
+            <p>Перетащи сюда файлы (.aia, .zip) или кликни для загрузки</p>
+            <input type="file" id="fileInput" accept=".aia,.zip" hidden>
+        </div>
+
+        <!-- Блок выбора ОС (пока только Android) -->
+        <div class="os-selector">
+            <button class="os-btn active" data-os="android">Android</button>
+            <button class="os-btn" data-os="ios" disabled>iOS (скоро)</button>
+        </div>
+
+        <!-- Кнопка сборки -->
+        <button id="buildBtn">Собрать APK</button>
+
+        <!-- Ссылка на скачивание (появится после сборки) -->
+        <a id="downloadLink" class="hidden" download>Скачать APK</a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

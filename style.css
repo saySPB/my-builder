@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+.upload-area {
+    border: 2px dashed #3498db;
+    padding: 30px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-area:hover {
+    background: #f0f8ff;
+}
+
+.os-selector {
+    margin: 20px 0;
+}
+
+.os-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background: #e0e0e0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.os-btn.active {
+    background: #3498db;
+    color: white;
+}
+
+#buildBtn {
+    padding: 12px 25px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#buildBtn:hover {
+    background: #27ae60;
+}
+
+.hidden {
+    display: none;
+}
+
+#downloadLink {
+    margin-top: 20px;
+    padding: 10px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
