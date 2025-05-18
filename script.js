@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const buildBtn = document.getElementById('buildBtn');
     const downloadLink = document.getElementById('downloadLink');
 
-    // Загрузка файлов
+    // Загрузка файлов (клик)
     uploadArea.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', handleFileUpload);
 
-    // Drag & Drop
+    // Drag & Drop (множественные файлы)
     uploadArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         uploadArea.style.background = '#f0f8ff';
@@ -23,36 +23,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Функция для отображения списка файлов
     function handleFileUpload() {
-        if (fileInput.files.length) {
-            const fileName = fileInput.files[0].name;
-            uploadArea.innerHTML = `<p>Файл загружен: <strong>${fileName}</strong></p>`;
-            buildBtn.disabled = false;
-        }
+        if (!fileInput.files.length) return;
+        
+        const files = Array.from(fileInput.files);
+        let filesHTML = files.map(file => 
+            `<div class="file-item">📄 ${file.name} (${formatBytes(file.size)})</div>`
+        ).join('');
+
+        uploadArea.innerHTML = `
+            <div class="files-list">${filesHTML}</div>
+            <p>Перетащите ещё файлы или кликните для загрузки</p>
+        `;
+        buildBtn.disabled = false;
     }
 
-    // Кнопка сборки
+    // Форматирование размера файла (например, "2.5 MB")
+    function formatBytes(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    // Кнопка сборки (теперь обрабатывает все файлы)
     buildBtn.addEventListener('click', () => {
         if (!fileInput.files.length) {
-            alert('Сначала загрузи файл проекта (.aia)');
+            alert('Загрузите хотя бы один файл!');
             return;
         }
+
+        const files = fileInput.files;
+        console.log('Файлы для сборки:', files); // Можно отправить на сервер
 
         buildBtn.textContent = 'Сборка...';
         buildBtn.disabled = true;
 
-        // Здесь будет вызов API для сборки (пока заглушка)
+        // Заглушка: имитация сборки
         setTimeout(() => {
             buildBtn.textContent = 'Собрать APK';
             buildBtn.disabled = false;
-            downloadLink.href = 'https://example.com/fake-apk.apk'; // Заглушка
+            downloadLink.href = '#';
+            downloadLink.textContent = 'Скачать app.zip (тест)';
             downloadLink.classList.remove('hidden');
-            downloadLink.textContent = 'Скачать app.apk';
-        }, 3000);
+        }, 2000);
     });
-});
-// Альтернатива: открываем App Inventor в новой вкладке
-buildBtn.addEventListener('click', () => {
-    if (!fileInput.files.length) return;
-    window.open('https://ai2.appinventor.mit.edu/', '_blank');
 });
